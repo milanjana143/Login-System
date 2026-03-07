@@ -2,64 +2,75 @@
 session_start();
 include 'conn.php';
 
-if (isset($_SESSION['user_id'])) {
-    header("Location: dashboard.php");
-    exit();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require './PHPMailer/src/Exception.php';
+require './PHPMailer/src/PHPMailer.php';
+require './PHPMailer/src/SMTP.php';
+
+if(isset($_POST['send_otp'])){
+
+$email = $_POST['email'];
+
+$sql = "SELECT * FROM users WHERE email='$email'";
+$query = mysqli_query($conn,$sql);
+$data = mysqli_fetch_assoc($query);
+
+if($data){
+
+$otp = rand(100000,999999);
+$otp_expiry = date("Y-m-d H:i:s", strtotime("+5 minutes"));
+
+mysqli_query($conn,"UPDATE users SET otp='$otp', otp_expiry='$otp_expiry' WHERE email='$email'");
+
+$mail = new PHPMailer(true);
+
+$mail->isSMTP();
+$mail->Host = 'smtp.gmail.com';
+$mail->SMTPAuth = true;
+$mail->Username = 'milan.appservice@gmail.com';
+$mail->Password = 'zvpcrrgpaiapxeno';
+$mail->SMTPSecure = 'ssl';
+$mail->Port = 465;
+
+$mail->setFrom('milan.appservice@gmail.com','Password Reset');
+$mail->addAddress($email);
+
+$mail->isHTML(true);
+$mail->Subject = "Password Reset OTP";
+$mail->Body = "Your OTP for password reset is: <b>$otp</b>";
+
+$mail->send();
+
+$_SESSION['reset_email']=$email;
+
+header("Location: verify_reset_otp.php");
+exit();
+
+}else{
+
+echo "<script>alert('Email not registered');</script>";
+
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
-
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    $sql = "SELECT * FROM users WHERE email='$email'";
-    $query = mysqli_query($conn,$sql);
-    $data = mysqli_fetch_assoc($query);
-
-    if($data){
-
-        if($data['is_verified'] == 0){
-
-            echo "<script>alert('Please verify your email first.');</script>";
-
-        }
-        else{
-
-            if(password_verify($password,$data['password'])){
-
-                $_SESSION['user_id'] = $data['id'];
-
-                header("Location: dashboard.php");
-                exit();
-
-            }else{
-
-                echo "<script>alert('Invalid Password');</script>";
-
-            }
-
-        }
-
-    }else{
-
-        echo "<script>alert('Email not registered');</script>";
-
-    }
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login | Secure Access</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forgot Password | Secure Access</title>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!-- FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
 
@@ -80,13 +91,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     box-sizing:border-box;
 }
 
-/* Body Background Image */
+/* Body Background */
 body{
     font-family:'Poppins',sans-serif;
 
     background:
-        linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.65)),
-        url("images/bg.jpeg");
+    linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.65)),
+    url("images/bg.jpeg");
 
     background-size:cover;
     background-position:center;
@@ -98,12 +109,11 @@ body{
     align-items:center;
 }
 
-/* Login Card */
+/* Card */
 .login-container{
     width:100%;
     max-width:400px;
     padding:40px;
-    background:var(--card-bg);
     border-radius:16px;
     box-shadow:0 10px 30px rgba(0,0,0,0.6);
     animation:fadeIn .7s ease;
@@ -126,7 +136,7 @@ body{
     font-size:14px;
 }
 
-/* Input Fields */
+/* Inputs */
 .input-group{
     position:relative;
     margin-bottom:20px;
@@ -153,22 +163,6 @@ body{
     top:50%;
     transform:translateY(-50%);
     color:var(--text-muted);
-}
-
-/* Forgot password */
-.actions{
-    text-align:right;
-    margin-bottom:25px;
-}
-
-.actions a{
-    font-size:12px;
-    text-decoration:none;
-    color:var(--text-muted);
-}
-
-.actions a:hover{
-    color:var(--primary);
 }
 
 /* Button */
@@ -216,18 +210,16 @@ button:hover{
     }
 }
 
-/* Mobile Responsive */
-@media (max-width: 480px){
+/* Mobile */
+@media (max-width:480px){
 
     body{
         padding:15px;
     }
 
     .login-container{
-        width:100%;
         padding:25px;
         border-radius:12px;
-        background: rgba(30,30,30,0.75);
     }
 
     .header h2{
@@ -257,35 +249,26 @@ button:hover{
 
 <div class="login-container">
 
-    <div class="header">
-        <h2>Welcome Back</h2>
-        <p>Please enter your details to sign in</p>
-    </div>
+<div class="header">
+<h2>Forgot Password</h2>
+<p>Enter your email to receive a password reset OTP</p>
+</div>
 
-    <form method="post">
+<form method="post">
 
-        <div class="input-group">
-            <input type="email" name="email" placeholder="Email Address" required>
-            <i class="fas fa-envelope"></i>
-        </div>
+<div class="input-group">
+<input type="email" name="email" placeholder="Email Address" required>
+<i class="fas fa-envelope"></i>
+</div>
 
-        <div class="input-group">
-            <input type="password" name="password" placeholder="Password" required>
-            <i class="fas fa-lock"></i>
-        </div>
+<button type="submit" name="send_otp">Send OTP</button>
 
-        <div class="actions">
-            <a href="forgot_password.php">Forgot Password?</a>
-        </div>
+<div class="footer">
+Remember your password?
+<a href="index.php">Login</a>
+</div>
 
-        <button type="submit" name="login">Log In</button>
-
-        <div class="footer">
-            Don't have an account?
-            <a href="registration.php">Sign up</a>
-        </div>
-
-    </form>
+</form>
 
 </div>
 
