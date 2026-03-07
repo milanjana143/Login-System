@@ -49,89 +49,243 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login | Secure Access</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-#container{
-    margin-left:400px;
-    border:1px solid black;
-    width:440px;
-    padding:20px;
-    margin-top:40px;
+
+/* Root Variables */
+:root{
+    --primary:#4facfe;
+    --secondary:#00f2fe;
+    --card-bg:#1e1e1e;
+    --input-bg:#2d2d2d;
+    --text:#ffffff;
+    --text-muted:#a0a0a0;
 }
 
-input[type=text],input[type=password]{
-    width:300px;
-    height:20px;
-    padding:10px;
+/* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-label{
-    font-size:20px;
-    font-weight:bold;
+/* Body Background Image */
+body{
+    font-family:'Poppins',sans-serif;
+
+    background:
+        linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.65)),
+        url("images/bg.jpeg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-form{
-    margin-left:50px;
+/* Login Card */
+.login-container{
+    width:100%;
+    max-width:400px;
+    padding:40px;
+    background:var(--card-bg);
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+    animation:fadeIn .7s ease;
+    background: rgba(30,30,30,0.75);
 }
 
-a{
+/* Header */
+.header{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.header h2{
+    color:var(--text);
+    margin-bottom:6px;
+}
+
+.header p{
+    color:var(--text-muted);
+    font-size:14px;
+}
+
+/* Input Fields */
+.input-group{
+    position:relative;
+    margin-bottom:20px;
+}
+
+.input-group input{
+    width:100%;
+    padding:14px 14px 14px 45px;
+    border:none;
+    border-radius:8px;
+    background:var(--input-bg);
+    color:var(--text);
+    font-size:14px;
+}
+
+.input-group input:focus{
+    outline:none;
+    border:1px solid var(--primary);
+}
+
+.input-group i{
+    position:absolute;
+    left:15px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--text-muted);
+}
+
+/* Forgot password */
+.actions{
+    text-align:right;
+    margin-bottom:25px;
+}
+
+.actions a{
+    font-size:12px;
     text-decoration:none;
-    font-weight:bold;
-    font-size:21px;
-    color:blue;
+    color:var(--text-muted);
 }
 
-a:hover{
+.actions a:hover{
+    color:var(--primary);
+}
+
+/* Button */
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    font-weight:600;
+    background:linear-gradient(to right,var(--primary),var(--secondary));
     cursor:pointer;
-    color:purple;
 }
 
-input[type=submit]{
-    width:70px;
-    background-color:blue;
-    border:1px solid blue;
-    color:white;
-    font-weight:bold;
-    padding:7px;
-    margin-left:130px;
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(79,172,254,.4);
 }
 
-input[type=submit]:hover{
-    background-color:purple;
-    cursor:pointer;
-    border:1px solid purple;
+/* Footer */
+.footer{
+    text-align:center;
+    margin-top:25px;
+    color:var(--text-muted);
 }
+
+.footer a{
+    color:var(--primary);
+    text-decoration:none;
+    font-weight:600;
+}
+
+.footer a:hover{
+    text-decoration:underline;
+}
+
+/* Animation */
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px){
+
+    body{
+        padding:15px;
+    }
+
+    .login-container{
+        width:100%;
+        padding:25px;
+        border-radius:12px;
+        background: rgba(30,30,30,0.75);
+    }
+
+    .header h2{
+        font-size:20px;
+    }
+
+    .header p{
+        font-size:13px;
+    }
+
+    .input-group input{
+        padding:12px 12px 12px 40px;
+        font-size:13px;
+    }
+
+    button{
+        padding:12px;
+        font-size:14px;
+    }
+
+}
+
 </style>
-
 </head>
 
 <body>
 
-<div id="container">
+<div class="login-container">
 
-<form method="post">
+    <div class="header">
+        <h2>Welcome Back</h2>
+        <p>Please enter your details to sign in</p>
+    </div>
 
-<label>Email</label><br>
-<input type="email" name="email" placeholder="Enter Your Email" required>
-<br><br>
+    <form method="post">
 
-<label>Password</label><br>
-<input type="password" name="password" placeholder="Enter Your Password" required>
-<br><br>
+        <div class="input-group">
+            <input type="email" name="email" placeholder="Email Address" required>
+            <i class="fas fa-envelope"></i>
+        </div>
 
-<input type="submit" name="login" value="Login">
+        <div class="input-group">
+            <input type="password" name="password" placeholder="Password" required>
+            <i class="fas fa-lock"></i>
+        </div>
 
-<br><br>
+        <div class="actions">
+            <a href="#">Forgot Password?</a>
+        </div>
 
-<label>Don't have an account? </label>
-<a href="registration.php">Sign Up</a>
+        <button type="submit" name="login">Log In</button>
 
-</form>
+        <div class="footer">
+            Don't have an account?
+            <a href="registration.php">Sign up</a>
+        </div>
+
+    </form>
 
 </div>
 
