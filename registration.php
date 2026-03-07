@@ -19,6 +19,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
+    $check = "SELECT * FROM users WHERE email='$email'";
+    $result = mysqli_query($conn,$check);
+
+    if(mysqli_num_rows($result) > 0){
+        echo "<script>alert('Email already registered. Please login.'); window.location='index.php';</script>";
+        exit();
+    }
+
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $otp = rand(100000,999999);
