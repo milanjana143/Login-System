@@ -126,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
             <input type="text" name="username" placeholder="Enter Username" required><br><br>
 
             <label for="email">Email:</label><br>
-            <input type="text" name="email" placeholder="Enter Your Email" required><br><br>
+            <input type="email" name="email" placeholder="Enter Your Email" required><br><br>
 
             <label for="password">Password:</label><br>
             <input type="password" name="password" placeholder="Enter Password" required><br><br>

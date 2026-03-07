@@ -117,7 +117,7 @@ input[type=submit]:hover{
 <form method="post">
 
 <label>Email</label><br>
-<input type="text" name="email" placeholder="Enter Your Email" required>
+<input type="email" name="email" placeholder="Enter Your Email" required>
 <br><br>
 
 <label>Password</label><br>
