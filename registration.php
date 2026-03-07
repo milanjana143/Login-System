@@ -1,6 +1,12 @@
 <?php
 session_start();
 include 'conn.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+require 'PHPMailer/src/Exception.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 if (isset($_SESSION['user_id'])) {
     header("Location: dashboard.php");
@@ -8,29 +14,55 @@ if (isset($_SESSION['user_id'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
+
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Hash the password
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashedPassword')";
-    $query = mysqli_query($conn, $sql);
+    $otp = rand(100000,999999);
+    $otp_expiry = date("Y-m-d H:i:s", strtotime("+5 minutes"));
 
-    if ($query) {
-        ?>
-            <script>
-    alert("Registration Successful.");
-    function navigateToPage() {
-        window.location.href = 'index.php';
-    }
-    window.onload = function() {
-        navigateToPage();
-    }
-</script>
-        <?php 
-    } else {
-       echo "<script> alert('Registration Failed. Try Again');</script>";
+    $sql = "INSERT INTO users (username,email,password,otp,otp_expiry,is_verified)
+            VALUES ('$username','$email','$hashedPassword','$otp','$otp_expiry',0)";
+
+    $query = mysqli_query($conn,$sql);
+
+    if($query){
+
+        $mail = new PHPMailer(true);
+
+        try{
+
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'milan.appservice@gmail.com';
+            $mail->Password = 'zvpcrrgpaiapxeno';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            $mail->setFrom('YOUR_GMAIL@gmail.com','OTP Login System');
+            $mail->addAddress($email);
+
+            $mail->isHTML(true);
+            $mail->Subject = "Email Verification OTP";
+            $mail->Body = "Your OTP is: <b>$otp</b>. It will expire in 5 minutes.";
+
+            $mail->send();
+
+            $_SESSION['temp_user'] = $email;
+
+            header("Location: otp_verification.php");
+            exit();
+
+        }catch(Exception $e){
+            echo "Mail could not be sent.";
+        }
+
+    }else{
+        echo "<script>alert('Registration Failed');</script>";
     }
 }
 ?>
