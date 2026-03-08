@@ -23,6 +23,8 @@ $username = $data['username'];
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Developer Dashboard</title>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <style>
 
 *{
@@ -165,6 +167,43 @@ text-align:center;
 
 }
 
+
+.settings-icon{
+    font-size:26px;
+    color:#b0b0b0;
+    margin-right:12px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    transition:0.3s;
+    
+}
+
+.settings-icon:hover{
+    color:#d0d0d0;  
+    transform:rotate(25deg);
+}
+
+.topbar-right{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+
+/* mobile responsive */
+@media (max-width:480px){
+
+.settings-icon{
+    font-size:20px;
+    margin-right:8px;
+}
+
+}
+
+
+
+
 </style>
 </head>
 
@@ -178,7 +217,16 @@ text-align:center;
 Welcome, <?php echo ucwords($username) ?> 👋 
 </div>
 
+
+<div class="topbar-right">
+
+<a href="account_settings.php" class="settings-icon">
+<i class="fas fa-cog"></i>
+</a>
+
 <a class="logout" href="logout.php">Logout</a>
+
+</div>
 
 </div>
 
