@@ -54,16 +54,16 @@ min-height:100vh;
 
 /* NAVBAR */
 
-.topbar{
+/* .topbar{
 display:flex;
 justify-content:space-between;
 align-items:center;
 padding:15px 30px;
 background:rgba(0,0,0,0.7);
 flex-wrap:wrap;
-}
+} */
 
-/* 
+
 .topbar{
 display:flex;
 justify-content:space-between;
@@ -79,7 +79,7 @@ rgba(0,0,0,0.85)
 
 backdrop-filter:blur(6px);
 flex-wrap:wrap;
-} */
+}
 
 .username{
 font-size:22px;

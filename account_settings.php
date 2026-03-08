@@ -67,7 +67,7 @@ font-family:'Poppins',sans-serif;
 
 background:
 linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.65)),
-url("images/bg.jpeg");
+url("images/background.jpeg");
 
 background-size:cover;
 background-position:center;
