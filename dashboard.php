@@ -73,7 +73,7 @@ padding:15px 30px;
 background:linear-gradient(
 to right,
 rgba(0,0,0,0.85),
-rgba(20,20,20,0.75),
+rgba(20,20,20,0.70),
 rgba(0,0,0,0.85)
 );
 
