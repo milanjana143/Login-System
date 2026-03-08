@@ -210,7 +210,7 @@ width:100%;
 padding:14px;
 border:none;
 border-radius:8px;
-font-weight:650;
+font-weight:550;
 font-size:19px;
 background:#ff4d4d;
 color:white;
@@ -224,7 +224,10 @@ transform:translateY(-2px);
 box-shadow:0 6px 15px rgba(255,77,77,0.4);
 }
 
-
+.save-btn{
+font-weight:550;
+font-size:19px;
+}
 
 
 
@@ -294,7 +297,7 @@ box-shadow:0 6px 15px rgba(255,77,77,0.4);
 <i class="fas fa-venus-mars"></i>
 </div>
 
-<button type="submit" name="update_profile">
+<button type="submit" name="update_profile" class="save-btn">
 <i class="fas fa-save"></i>&nbsp; Save Changes</button> <br><br>
 
 
