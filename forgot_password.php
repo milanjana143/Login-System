@@ -29,12 +29,12 @@ $mail = new PHPMailer(true);
 $mail->isSMTP();
 $mail->Host = 'smtp.gmail.com';
 $mail->SMTPAuth = true;
-$mail->Username = 'milan.appservice@gmail.com';
-$mail->Password = 'zvpcrrgpaiapxeno';
+$mail->Username = 'mjana3321.important@gmail.com';
+$mail->Password = 'tyoswxfoyolorvyc';
 $mail->SMTPSecure = 'ssl';
 $mail->Port = 465;
 
-$mail->setFrom('milan.appservice@gmail.com','Password Reset');
+$mail->setFrom('mjana3321.important@gmail.com','Password Reset');
 $mail->addAddress($email);
 
 $mail->isHTML(true);
