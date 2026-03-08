@@ -22,6 +22,23 @@ exit();
 
 }
 
+/* DELETE ACCOUNT */
+if(isset($_POST['delete_account'])){
+
+$delete_sql = "DELETE FROM users WHERE id='$user_id'";
+mysqli_query($conn,$delete_sql);
+
+session_destroy();
+
+echo "<script>
+alert('Your account has been deleted successfully.');
+window.location='index.php';
+</script>";
+
+exit();
+
+}
+
 /* FETCH USER DATA */
 
 $sql = "SELECT username, gender FROM users WHERE id='$user_id'";
@@ -179,9 +196,34 @@ text-decoration:none;
 margin-top:10px;
 }
 
+
 .password-box a:hover{
 background:#3a3a3a;
 }
+
+
+
+
+
+.delete-btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:8px;
+font-weight:650;
+font-size:19px;
+background:#ff4d4d;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+.delete-btn:hover{
+background:#e03a3a;
+transform:translateY(-2px);
+box-shadow:0 6px 15px rgba(255,77,77,0.4);
+}
+
 
 
 
@@ -252,7 +294,34 @@ background:#3a3a3a;
 <i class="fas fa-venus-mars"></i>
 </div>
 
-<button type="submit" name="update_profile">Save Changes</button>
+<button type="submit" name="update_profile">
+<i class="fas fa-save"></i>&nbsp; Save Changes</button> <br><br>
+
+
+
+<!-- <div class="password-box">
+
+<p style="color:#a0a0a0;">Want to delete your account?</p>
+
+<button type="submit" name="delete_account"
+onclick="return confirm('Are you sure you want to delete your account? This cannot be undone.');">
+
+<i class="fas fa-trash"></i> &nbsp;Delete Account
+
+</button>
+
+</div> -->
+
+
+<button type="submit" name="delete_account" class="delete-btn"
+onclick="return confirm('Are you sure you want to delete your account?');">
+
+<i class="fas fa-trash"></i> &nbsp;Delete Account
+
+</button>
+
+
+
 
 </form>
 
@@ -267,6 +336,7 @@ background:#3a3a3a;
 </a>
 
 </div>
+
 
 </div>
 
