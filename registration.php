@@ -150,7 +150,7 @@ body{
 
 .header p{
     color:var(--text-muted);
-    font-size:14px;
+    font-size:15px;
 }
 
 /* Input Fields */
@@ -188,7 +188,8 @@ button{
     padding:14px;
     border:none;
     border-radius:8px;
-    font-weight:600;
+    font-weight:650;
+    font-size:19px;
     background:linear-gradient(to right,var(--primary),var(--secondary));
     cursor:pointer;
 }
@@ -253,6 +254,11 @@ button:hover{
         font-size:13px;
     }
 
+    button{
+        padding:12px;
+        font-size:18px;
+    }
+
 }
 
 </style>
@@ -284,7 +290,7 @@ button:hover{
             <i class="fas fa-lock"></i>
         </div>
 
-        <button type="submit" name="register">Register</button>
+        <button type="submit" name="register">Sign Up</button>
 
         <div class="footer">
             Already have an account?

@@ -123,7 +123,7 @@ body{
 
 .header p{
     color:var(--text-muted);
-    font-size:14px;
+    font-size:15px;
 }
 
 /* Input Fields */
@@ -162,7 +162,7 @@ body{
 }
 
 .actions a{
-    font-size:12px;
+    font-size:14px;
     text-decoration:none;
     color:var(--text-muted);
 }
@@ -177,7 +177,8 @@ button{
     padding:14px;
     border:none;
     border-radius:8px;
-    font-weight:600;
+    font-size: 19px;
+    font-weight:650;
     background:linear-gradient(to right,var(--primary),var(--secondary));
     cursor:pointer;
 }
@@ -245,7 +246,7 @@ button:hover{
 
     button{
         padding:12px;
-        font-size:14px;
+        font-size:18px;
     }
 
 }
@@ -282,7 +283,7 @@ button:hover{
 
         <div class="footer">
             Don't have an account?
-            <a href="registration.php">Sign up</a>
+            <a href="registration.php">Sign Up</a>
         </div>
 
     </form>

@@ -133,7 +133,7 @@ body{
 
 .header p{
     color:var(--text-muted);
-    font-size:14px;
+    font-size:15px;
 }
 
 /* Inputs */
@@ -171,7 +171,8 @@ button{
     padding:14px;
     border:none;
     border-radius:8px;
-    font-weight:600;
+    font-weight:650;
+    font-size:19px;
     background:linear-gradient(to right,var(--primary),var(--secondary));
     cursor:pointer;
 }
@@ -237,7 +238,7 @@ button:hover{
 
     button{
         padding:12px;
-        font-size:14px;
+        font-size:18px;
     }
 
 }
@@ -251,7 +252,7 @@ button:hover{
 
 <div class="header">
 <h2>Forgot Password</h2>
-<p>Enter your email to receive a password reset OTP</p>
+<p>Enter your email to change password</p>
 </div>
 
 <form method="post">

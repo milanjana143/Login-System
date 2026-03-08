@@ -94,7 +94,7 @@ body{
 
 .header p{
     color:var(--text-muted);
-    font-size:14px;
+    font-size:15px;
     margin-bottom:30px;
 }
 
@@ -133,7 +133,8 @@ button{
     margin-top:25px;
     border:none;
     border-radius:8px;
-    font-weight:600;
+    font-weight:650;
+    font-size:19px;
     background:linear-gradient(to right,var(--primary),var(--secondary));
     cursor:pointer;
 }
@@ -171,6 +172,10 @@ button:hover{
         font-size:20px;
     }
 
+     button{
+        padding:12px;
+        font-size:18px;
+    }
 }
 
 </style>
