@@ -29,7 +29,8 @@ echo "<script>alert('Password changed successfully'); window.location='index.php
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Reset Password</title>
+<title>Login System</title>
+<link rel="icon" type="image/png" href="images/login.png">
 
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
