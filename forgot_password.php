@@ -39,7 +39,23 @@ $mail->addAddress($email);
 
 $mail->isHTML(true);
 $mail->Subject = "Password Reset OTP";
-$mail->Body = "Your OTP for password reset is: <b>$otp</b>";
+
+$mail->Body = "
+    <div style='font-family:Arial,sans-serif;text-align:center;padding:20px'>
+    <h2 style='color:#4facfe;'>Password Reset Request</h2>
+
+    <p>Your One Time Password is:</p>
+
+    <h1 style='letter-spacing:3px;color:#00f2fe;'>$otp</h1>
+
+    <p>This OTP will expire in <b>5 minutes</b>.</p>
+
+    <p style='font-size:12px;color:gray'>
+    If you did not request a password reset, please ignore this email.
+    </p>
+
+    </div>
+    ";
 
 $mail->send();
 

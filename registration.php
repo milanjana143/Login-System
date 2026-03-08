@@ -52,12 +52,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
-            $mail->setFrom('YOUR_GMAIL@gmail.com','OTP Login System');
+            $mail->setFrom('YOUR_GMAIL@gmail.com','Login System');
             $mail->addAddress($email);
 
             $mail->isHTML(true);
             $mail->Subject = "Email Verification OTP";
-            $mail->Body = "Your OTP is: <b>$otp</b>. It will expire in 5 minutes.";
+            
+            $mail->Body = "
+                <div style='font-family:Arial,sans-serif;text-align:center;padding:20px'>
+                <h2 style='color:#4facfe;'>Email Verification</h2>
+
+                <p>Your One Time Password is:</p>
+
+                <h1 style='letter-spacing:3px;color:#00f2fe;'>$otp</h1>
+
+                <p>This OTP will expire in <b>5 minutes</b>.</p>
+
+                <p style='font-size:12px;color:gray'>
+                If you did not request this code, please ignore this email.
+                </p>
+
+                </div>
+                ";
 
             $mail->send();
 
