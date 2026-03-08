@@ -169,7 +169,7 @@ text-align:center;
 
 
 .settings-icon{
-    font-size:26px;
+    font-size:24px;
     color:#b0b0b0;
     margin-right:12px;
     text-decoration:none;
