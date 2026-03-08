@@ -11,13 +11,13 @@ $new_username = mysqli_real_escape_string($conn, $_POST['username']);
 $new_gender = mysqli_real_escape_string($conn, $_POST['gender']);
 
 $update_sql = "UPDATE users 
-SET username='$new_username', gender='$new_gender' 
+SET username='$new_username', gender='$new_gender'
 WHERE id='$user_id'";
 
 mysqli_query($conn, $update_sql);
 
-/* prevent form resubmission */
-header("Location: account_settings.php");
+/* redirect to dashboard */
+header("Location: dashboard.php");
 exit();
 
 }

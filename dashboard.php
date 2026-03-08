@@ -9,11 +9,12 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-$sql = "SELECT username FROM users WHERE id='$user_id'";
+$sql = "SELECT username, gender FROM users WHERE id='$user_id'";
 $query = mysqli_query($conn, $sql);
 $data = mysqli_fetch_assoc($query);
 
 $username = $data['username'];
+$current_gender = $data['gender'];
 ?>
 
 <!DOCTYPE html>
@@ -35,9 +36,14 @@ body{
 margin:0;
 font-family:Segoe UI, sans-serif;
 color:white;
-background:url("images/bg.jpeg") no-repeat center center/cover;
+
+background:url("images/background.jpeg") no-repeat center top;
+background-size:cover;
+
 min-height:100vh;
 }
+
+
 
 /* overlay */
 
@@ -57,6 +63,24 @@ background:rgba(0,0,0,0.7);
 flex-wrap:wrap;
 }
 
+/* 
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 30px;
+
+background:linear-gradient(
+to right,
+rgba(0,0,0,0.85),
+rgba(20,20,20,0.75),
+rgba(0,0,0,0.85)
+);
+
+backdrop-filter:blur(6px);
+flex-wrap:wrap;
+} */
+
 .username{
 font-size:22px;
 font-weight:bold;
@@ -75,7 +99,7 @@ color:white;
 .container{
 max-width:900px;
 margin:auto;
-margin-top:60px;
+margin-top:70px;
 background: rgba(30,30,30,0.82);
 padding:40px;
 border-radius:12px;
@@ -113,6 +137,14 @@ transition:0.3s;
 
 .social a:hover{
 background:#30363d;
+}
+
+.avatar{
+width:43px;
+height:43px;
+border-radius:50%;
+vertical-align:middle;
+margin-right:8px;
 }
 
 /* RESPONSIVE */
@@ -214,7 +246,17 @@ gap:12px;
 <div class="topbar">
 
 <div class="username">
-Welcome, <?php echo ucwords($username) ?> 👋 
+
+<?php
+if($current_gender == "male"){
+echo '<img src="images/male.png" class="avatar">';
+}else{
+echo '<img src="images/female.png" class="avatar">';
+}
+?>
+
+Welcome, <?php echo ucwords($username) ?> 👋
+
 </div>
 
 
