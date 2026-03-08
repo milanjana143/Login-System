@@ -16,6 +16,7 @@ if (isset($_SESSION['user_id'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
 
     $username = $_POST['username'];
+    $gender = $_POST['gender'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -32,8 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     $otp = rand(100000,999999);
     $otp_expiry = date("Y-m-d H:i:s", strtotime("+5 minutes"));
 
-    $sql = "INSERT INTO users (username,email,password,otp,otp_expiry,is_verified)
-            VALUES ('$username','$email','$hashedPassword','$otp','$otp_expiry',0)";
+    $sql = "INSERT INTO users (username,gender,email,password,otp,otp_expiry,is_verified)
+            VALUES ('$username','$gender','$email','$hashedPassword','$otp','$otp_expiry',0)";
 
     $query = mysqli_query($conn,$sql);
 
@@ -216,6 +217,30 @@ button:hover{
     text-decoration:underline;
 }
 
+
+.input-group select{
+    width:100%;
+    padding:14px 14px 14px 45px;
+    border:none;
+    border-radius:8px;
+    background:var(--input-bg);
+    /* color:var(--text-muted); */
+    color:rgba(255,255,255,0.35); /* reduced opacity */
+    font-size:14px;
+    appearance:none;
+}
+
+.input-group select:focus{
+    outline:none;
+    border:1px solid var(--primary);
+}
+
+/* when user selects male/female */
+.input-group select:valid{
+    color:#ffffff;
+}
+
+
 /* Animation */
 @keyframes fadeIn{
     from{
@@ -279,6 +304,22 @@ button:hover{
             <input type="text" name="username" placeholder="Username" required>
             <i class="fas fa-user"></i>
         </div>
+
+
+
+        <div class="input-group">
+
+        <select name="gender" required>
+        <option value=""disabled selected hidden>Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        </select>
+
+        <i class="fas fa-venus-mars"></i>
+
+        </div>
+
+
 
         <div class="input-group">
             <input type="email" name="email" placeholder="Email Address" required>
