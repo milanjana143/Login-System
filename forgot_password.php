@@ -29,8 +29,8 @@ $mail = new PHPMailer(true);
 $mail->isSMTP();
 $mail->Host = 'smtp.gmail.com';
 $mail->SMTPAuth = true;
-$mail->Username = 'mjana3321.important@gmail.com';
-$mail->Password = 'tyoswxfoyolorvyc';
+$mail->Username = ' ';   // Your OTP sender email id
+$mail->Password = ' ';   // App password
 $mail->SMTPSecure = 'ssl';
 $mail->Port = 465;
 

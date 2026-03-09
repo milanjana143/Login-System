@@ -47,8 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'mjana3321.important@gmail.com';
-            $mail->Password = 'tyoswxfoyolorvyc';
+            $mail->Username = ' ';   // Your OTP sender email id
+            $mail->Password = ' ';   // App password
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
