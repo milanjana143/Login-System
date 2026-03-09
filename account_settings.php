@@ -229,6 +229,10 @@ font-weight:550;
 font-size:19px;
 }
 
+.fa-trash{
+    font-size:16.6px;
+}
+
 
 
 /* Mobile Responsive */
@@ -319,7 +323,7 @@ onclick="return confirm('Are you sure you want to delete your account? This cann
 <button type="submit" name="delete_account" class="delete-btn"
 onclick="return confirm('Are you sure you want to delete your account?');">
 
-<i class="fas fa-trash"></i> &nbsp;Delete Account
+<i class="fas fa-trash" ></i> &nbsp;<span class="delete-text">Delete Account</span>
 
 </button>
 
