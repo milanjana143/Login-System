@@ -268,7 +268,7 @@ button:hover{
 <div class="login-container">
 
 <div class="header">
-<h2>Forgot Password</h2>
+<h2>Change Password</h2>
 <p>Enter your email to change password</p>
 </div>
 
