@@ -169,14 +169,20 @@ margin-right:8px;
     transform:rotate(25deg);
 }
 
+
+
+
 .logout-icon{
     color:#d0d0d0;
     transition: transform 0.3s ease;
 }
 
 .logout-icon:hover{
-    transform: scale(0.1);
+    transform: scale(1.2);
 }
+
+
+
 
 .topbar-right{
 display:flex;
