@@ -1,0 +1,1 @@
+If MySQL automatic stop on XAMPP control, open task manager search mysql and end the mysql (mysqld) task by right click on it.
